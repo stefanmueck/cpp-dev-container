@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-set(MODULE_NAME pg-module)
+set(MODULE_NAME playground-lib)
 project(${MODULE_NAME} LANGUAGES C CXX)
 
 ################################################################

@@ -68,7 +68,7 @@ target_include_directories(${MODULE_NAME}
 # link dependencies
 target_link_libraries(${MODULE_NAME}
   PUBLIC
-  pg-module::pg-module
+  playground-lib::playground-lib
   project::compile_warnings
   project::compile_options
 )
@@ -116,6 +116,6 @@ if(ENABLE_TESTING)
     PRIVATE
     Catch2::Catch2
     trompeloeil::trompeloeil
-    pg-module::pg-module
+    playground-lib::playground-lib
   )
 endif()

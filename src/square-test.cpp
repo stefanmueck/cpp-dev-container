@@ -10,7 +10,7 @@ SCENARIO("This is an example scenario", "[Square]")
     GIVEN("A number to be squared")
     {
         constexpr int to_be_squared(2);
-        constexpr int expected(4);
+        constexpr int expected(to_be_squared * to_be_squared);
         REQUIRE(square(to_be_squared) == expected);
     }
 }
