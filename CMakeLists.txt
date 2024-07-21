@@ -95,27 +95,61 @@ install(TARGETS ${MODULE_NAME}
 # testing
 option(ENABLE_TESTING "Enable Test Builds" ON)
 if(ENABLE_TESTING)
-  find_package(Catch2 REQUIRED)
-  find_package(trompeloeil REQUIRED)
 
-  add_executable(${PROJECT_NAME}-test)
-  target_sources(${PROJECT_NAME}-test
-    PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/square-test.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/unittest-main.cpp
-  )
+  option(TESTING_USE_GTEST "Use googletest as testing framework" ON)
+  option(TESTING_USE_CATCH "Use Catch2 with trompeloeil as testing framework" OFF)
 
-  target_compile_options(${PROJECT_NAME}-test
+  if(TESTING_USE_GTEST AND TESTING_USE_CATCH)
+    message(FATAL_ERROR "Please enable only ONE testing framework.")
+  endif()
+
+  set(MODULE_TEST_NAME ${PROJECT_NAME}-test)
+  add_executable(${MODULE_TEST_NAME})
+
+  if(TESTING_USE_GTEST)
+    message(STATUS "Testing: Using google test.")
+    include(FetchContent)
+    FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        v1.15.0)
+    FetchContent_MakeAvailable(googletest)
+
+    target_sources(${MODULE_TEST_NAME}
+      PRIVATE
+      ${CMAKE_CURRENT_SOURCE_DIR}/src/square-test-gtest.cpp
+    )
+
+    target_link_libraries(${MODULE_TEST_NAME}
+      PRIVATE
+      GTest::gtest_main
+      playground-lib::playground-lib
+    )
+  elseif(TESTING_USE_CATCH)
+    message(STATUS "Testing: Using Catch2 with trompeloeil.")
+    find_package(Catch2 REQUIRED)
+    find_package(trompeloeil REQUIRED)  
+          
+    target_sources(${MODULE_TEST_NAME}
+      PRIVATE
+      ${CMAKE_CURRENT_SOURCE_DIR}/src/square-test.cpp
+      ${CMAKE_CURRENT_SOURCE_DIR}/tests/unittest-main.cpp
+    )    
+
+    target_link_libraries(${MODULE_TEST_NAME}
+      PRIVATE
+      Catch2::Catch2
+      trompeloeil::trompeloeil
+      playground-lib::playground-lib
+    )
+  else()
+    message(FATAL_ERROR "No testing framework specified.")
+  endif(TESTING_USE_GTEST)
+
+  target_compile_options(${MODULE_TEST_NAME}
     PRIVATE
     ${COMPILE_WARNING_AS_ERROR}
     -Wall
     -Wextra
   )
-
-  target_link_libraries(${PROJECT_NAME}-test
-    PRIVATE
-    Catch2::Catch2
-    trompeloeil::trompeloeil
-    playground-lib::playground-lib
-  )
-endif()
+endif(ENABLE_TESTING)
