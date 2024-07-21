@@ -10,7 +10,7 @@ RUN apt-get update && \
     ca-certificates curl gnupg2 openssh-client \
     make cmake cmake-curses-gui ninja-build \
     gcc-12 g++-12 gdb gdbserver iwyu \
-    clang-14 clang-tidy-14 clang-format-14 \
+    clang-14 clang-tidy-14 clang-format-14 clangd-14 \
     cppcheck git tig catch2 \
     python3 python3-pip
 
@@ -36,6 +36,7 @@ RUN chown -R $DEVUSER:$DEVUSER /home/$DEVUSER/.ssh
 # add links to clang-tidy and clang-format
 RUN ln -s /usr/bin/clang-format-14 /usr/bin/clang-format
 RUN ln -s /usr/bin/clang-tidy-14 /usr/bin/clang-tidy
+RUN ln -s /usr/bin/clangd-14 /usr/bin/clangd
 
 # Install Starship shell prompt
 RUN curl -fsSL https://starship.rs/install.sh | sh -s -- -y

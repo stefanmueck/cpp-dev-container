@@ -8,16 +8,12 @@
 		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
 		"dockerfile": "../Dockerfile"
 	},
-
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "cat /etc/os-release",
-
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
@@ -25,39 +21,32 @@
 				// cmake
 				"ms-vscode.cmake-tools",
 				"twxs.cmake",
-
 				// cpp
 				"ms-vscode.cpptools",
 				"ms-vscode.cpptools-extension-pack",
 				"amiralizadeh9480.cpp-helper",
-
+				"llvm-vs-code-extensions.vscode-clangd",
 				// python
 				"ms-python.python",
 				"ms-python.vscode-pylance",
 				"ms-python.debugpy",
 				"donjayamanne.python-environment-manager",
 				"donjayamanne.python-extension-pack",
-
 				// docker
 				"ms-azuretools.vscode-docker",
-
 				// bookmarks
 				"alefragnani.bookmarks",
-
 				// git
 				"eamodio.gitlens",
 				"mhutchie.git-graph",
-
 				// shell
 				"foxundermoon.shell-format",
 				"timonwong.shellcheck",
-
 				// yaml
 				"redhat.vscode-yaml"
 			]
 		}
 	},
-
 	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
 	"remoteUser": "vscode"
 }
