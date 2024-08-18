@@ -20,7 +20,7 @@ if(TESTING_USE_GTEST)
 
     target_sources(${MODULE_NAME}
         PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/square-test-gtest.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/PropertyBag-test.cpp
     )
 
     target_link_libraries(${MODULE_NAME}

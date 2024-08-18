@@ -3,7 +3,7 @@ LABEL version="1.0"
 
 ARG DEVUSER="vscode"
 
-# Install required packages
+# install required packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     bash bash-completion vim ccache \
@@ -26,8 +26,6 @@ RUN mkdir -p $BUILD_DIR && \
     cmake .. && \
     cmake --build . --target install
 
-# cleanup
-RUN rm -rf $BUILD_DIR/*
 
 # add a user
 RUN useradd -ms /bin/bash $DEVUSER
@@ -37,7 +35,7 @@ RUN mkdir -p /home/$DEVUSER/.ssh
 RUN echo "Host *\n\tStrictHostKeyChecking no\n" >> /home/$DEVUSER/.ssh/config
 RUN chown -R $DEVUSER:$DEVUSER /home/$DEVUSER/.ssh
 
-# add links to clang-tidy and clang-format
+# create links to clang tools
 RUN ln -s /usr/bin/clang-format-14 /usr/bin/clang-format
 RUN ln -s /usr/bin/clang-tidy-14 /usr/bin/clang-tidy
 RUN ln -s /usr/bin/clangd-14 /usr/bin/clangd
