@@ -38,7 +38,7 @@ include(cmake/cache.cmake)
 # disassembly
 option(GENERATE_DISSASSEMBLY "Generate Dissassembly" OFF)
 if(GENERATE_DISSASSEMBLY)
-  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps -masm=intel")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps -masm=intel")
 endif(GENERATE_DISSASSEMBLY)
 
 ################################################################
@@ -52,25 +52,25 @@ add_executable(${MODULE_NAME})
 ################################################################
 # sources
 target_sources(${MODULE_NAME}
-  PRIVATE
-  ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 )
 
 ################################################################
 # includes
 target_include_directories(${MODULE_NAME}
-  PRIVATE
-  ${CMAKE_BINARY_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}
+    PRIVATE
+    ${CMAKE_BINARY_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 ################################################################
 # link dependencies
 target_link_libraries(${MODULE_NAME}
-  PUBLIC
-  playground-lib::playground-lib
-  project::compile_warnings
-  project::compile_options
+    PUBLIC
+    playground-lib::playground-lib
+    project::compile_warnings
+    project::compile_options
 )
 
 ################################################################
@@ -86,70 +86,14 @@ enable_sanitizers(${MODULE_NAME})
 ################################################################
 # install
 install(TARGETS ${MODULE_NAME}
-  RUNTIME DESTINATION bin
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
 )
 
 ################################################################
 # testing
 option(ENABLE_TESTING "Enable Test Builds" ON)
 if(ENABLE_TESTING)
-
-  option(TESTING_USE_GTEST "Use googletest as testing framework" ON)
-  option(TESTING_USE_CATCH "Use Catch2 with trompeloeil as testing framework" OFF)
-
-  if(TESTING_USE_GTEST AND TESTING_USE_CATCH)
-    message(FATAL_ERROR "Please enable only ONE testing framework.")
-  endif()
-
-  set(MODULE_TEST_NAME ${PROJECT_NAME}-test)
-  add_executable(${MODULE_TEST_NAME})
-
-  if(TESTING_USE_GTEST)
-    message(STATUS "Testing: Using google test.")
-    include(FetchContent)
-    FetchContent_Declare(
-    googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG        v1.15.0)
-    FetchContent_MakeAvailable(googletest)
-
-    target_sources(${MODULE_TEST_NAME}
-      PRIVATE
-      ${CMAKE_CURRENT_SOURCE_DIR}/src/square-test-gtest.cpp
-    )
-
-    target_link_libraries(${MODULE_TEST_NAME}
-      PRIVATE
-      GTest::gtest_main
-      playground-lib::playground-lib
-    )
-  elseif(TESTING_USE_CATCH)
-    message(STATUS "Testing: Using Catch2 with trompeloeil.")
-    find_package(Catch2 REQUIRED)
-    find_package(trompeloeil REQUIRED)  
-          
-    target_sources(${MODULE_TEST_NAME}
-      PRIVATE
-      ${CMAKE_CURRENT_SOURCE_DIR}/src/square-test.cpp
-      ${CMAKE_CURRENT_SOURCE_DIR}/tests/unittest-main.cpp
-    )    
-
-    target_link_libraries(${MODULE_TEST_NAME}
-      PRIVATE
-      Catch2::Catch2
-      trompeloeil::trompeloeil
-      playground-lib::playground-lib
-    )
-  else()
-    message(FATAL_ERROR "No testing framework specified.")
-  endif(TESTING_USE_GTEST)
-
-  target_compile_options(${MODULE_TEST_NAME}
-    PRIVATE
-    ${COMPILE_WARNING_AS_ERROR}
-    -Wall
-    -Wextra
-  )
+    add_subdirectory(tests)
 endif(ENABLE_TESTING)
