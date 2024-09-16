@@ -12,7 +12,7 @@ class PropertyBag
     class Property
     {
       public:
-        Property(const TProperty& property, bool compare = true)
+        explicit Property(const TProperty& property, bool compare = true)
             : m_property(property)
             , m_compare(compare)
         {}
