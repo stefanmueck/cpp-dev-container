@@ -12,8 +12,12 @@ add_library(${MODULE_NAME}::${MODULE_NAME} ALIAS ${MODULE_NAME})
 # sources
 target_sources(${MODULE_NAME}
   PRIVATE
-  ${CMAKE_CURRENT_SOURCE_DIR}/dummy.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/PropertyBag.h
+  
+  ${CMAKE_CURRENT_SOURCE_DIR}/BashCommand/BashCommand.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/BashCommand/BashCommand.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/PropertyBag/PropertyBag.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/ValueRange/ValueRange.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/VlanId/VlanId.h
 )
 
 ################################################################

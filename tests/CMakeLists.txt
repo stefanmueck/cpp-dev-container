@@ -16,7 +16,10 @@ FetchContent_MakeAvailable(googletest)
 
 target_sources(${MODULE_NAME}
     PRIVATE
-    ${PROJECT_SOURCE_ROOT}/PropertyBag-test.cpp
+    ${PROJECT_SOURCE_ROOT}/BashCommand/BashCommand-test.cpp
+    ${PROJECT_SOURCE_ROOT}/PropertyBag/PropertyBag-test.cpp
+    ${PROJECT_SOURCE_ROOT}/ValueRange/ValueRange-test.cpp
+    ${PROJECT_SOURCE_ROOT}/VlanId/VlanId-test.cpp
 )
 
 target_link_libraries(${MODULE_NAME}

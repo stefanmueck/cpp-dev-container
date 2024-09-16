@@ -12,7 +12,7 @@ class PropertyBag
     class Property
     {
       public:
-        Property(const TProperty& property, bool compare = true)
+        explicit Property(const TProperty& property, bool compare = true)
             : m_property(property)
             , m_compare(compare)
         {}
@@ -22,20 +22,11 @@ class PropertyBag
             return ((m_compare == other.m_compare) && (m_property == other.m_property));
         }
 
-        bool operator!=(const Property& other) const
-        {
-            return not(*this == other);
-        }
+        bool operator!=(const Property& other) const { return not(*this == other); }
 
-        const TProperty& property() const
-        {
-            return m_property;
-        }
+        const TProperty& property() const { return m_property; }
 
-        bool isCompare() const
-        {
-            return m_compare;
-        }
+        bool isCompare() const { return m_compare; }
 
       private:
         const TProperty m_property;
@@ -57,7 +48,7 @@ class PropertyBag
     const MapType& properties() const;
 
   private:
-    std::vector<KeyPropertyPairType> uniqueElements(const PropertyBag& other) const;
+    std::vector<KeyPropertyPairType> symetricDifference(const PropertyBag& other) const;
 
   private:
     MapType m_properties;
@@ -102,7 +93,7 @@ bool PropertyBag<TKey, TProperty>::operator==(const PropertyBag& other) const
         }
     }
 
-    const auto uniques = uniqueElements(other);
+    const auto uniques = symetricDifference(other);
     for (const auto& item : uniques)
     {
         if (item.second.isCompare() == true)
@@ -128,7 +119,7 @@ const typename PropertyBag<TKey, TProperty>::MapType& PropertyBag<TKey, TPropert
 
 template <typename TKey, typename TProperty>
 std::vector<typename PropertyBag<TKey, TProperty>::KeyPropertyPairType> PropertyBag<
-    TKey, TProperty>::uniqueElements(const PropertyBag& other) const
+    TKey, TProperty>::symetricDifference(const PropertyBag& other) const
 {
     std::vector<KeyPropertyPairType> ret;
 
