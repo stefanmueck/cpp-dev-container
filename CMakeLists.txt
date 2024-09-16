@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_VERBOSE_MAKEFILE OFF CACHE STRING "" FORCE)
 set(CMAKE_COLOR_MAKEFILE   OFF CACHE STRING "" FORCE)
 
-enable_testing()
+set(PROJECT_SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
 ################################################################
 # project warnings
@@ -100,5 +100,6 @@ install(TARGETS ${MODULE_NAME}
 # testing
 option(ENABLE_TESTING "Enable Test Builds" ON)
 if(ENABLE_TESTING)
+    enable_testing()
     add_subdirectory(tests)
 endif(ENABLE_TESTING)
