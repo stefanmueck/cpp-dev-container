@@ -10,55 +10,46 @@ PointerAlignment: Left
 AccessModifierOffset: -2
 BreakBeforeBraces: Custom
 BraceWrapping:
+  AfterCaseLabel: true
   AfterClass: true
   AfterControlStatement: true
   AfterEnum: true
+  AfterExternBlock: true
   AfterFunction: true
   AfterNamespace: false
   AfterStruct: true
   AfterUnion: true
-  AfterExternBlock: true
-  AfterCaseLabel: true
   BeforeCatch: true
   BeforeElse: true
+  BeforeLambdaBody: false
+  BeforeWhile: false
   IndentBraces: false
   SplitEmptyFunction: false
-  SplitEmptyRecord: false
   SplitEmptyNamespace: false
+  SplitEmptyRecord: false
 
 CompactNamespaces: true
-AllowShortFunctionsOnASingleLine: None
-BreakConstructorInitializers: BeforeComma
-
-# following rules are not mentioned in the coding guideline
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
-# Clang 9.0.0. feature   AlignConsecutiveMacros:       false
+AlignEscapedNewlinesLeft: false
 AlignOperands: true
 AlignTrailingComments: true
 AllowAllParametersOfDeclarationOnNextLine: true
-AllowShortBlocksOnASingleLine: false
+AllowShortBlocksOnASingleLine: true
 AllowShortCaseLabelsOnASingleLine: false
-AllowShortIfStatementsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: Empty
 AllowShortLoopsOnASingleLine: false
-BreakBeforeTernaryOperators: false
-BreakConstructorInitializersBeforeComma: false
-AlignEscapedNewlinesLeft: false
 AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: true
 BinPackArguments: true
 BinPackParameters: true
-SpaceBeforeParens: ControlStatements
-SpaceInEmptyParentheses: false
-SpacesBeforeTrailingComments: 1
-SpacesInAngles: false
-SpacesInContainerLiterals: true
-SpacesInCStyleCastParentheses: false
-SpacesInParentheses: false
-SpacesInSquareBrackets: false
+BreakBeforeTernaryOperators: false
+BreakConstructorInitializers: BeforeComma
+BreakConstructorInitializersBeforeComma: false
 IndentCaseLabels: false
 IndentWidth: 4
 IndentWrappedFunctionNames: false
@@ -72,8 +63,17 @@ PenaltyBreakString: 1000
 PenaltyExcessCharacter: 1000000
 PenaltyReturnTypeOnItsOwnLine: 1000
 ReflowComments: true
+SeparateDefinitionBlocks: Leave
 SortIncludes: true
 SpaceAfterCStyleCast: false
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles: false
+SpacesInContainerLiterals: true
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
 
 # STY-21
 SpaceBeforeAssignmentOperators: true
