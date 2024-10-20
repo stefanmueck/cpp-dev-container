@@ -2,9 +2,9 @@
 #include <iostream>
 #include <string>
 
-#include "BashCommand.h"
-#include "ValueRange.h"
-#include "VlanId.h"
+#include "BashCommand/BashCommand.h"
+#include "ValueRange/ValueRange.h"
+#include "VlanId/VlanId.h"
 
 int main()
 {
