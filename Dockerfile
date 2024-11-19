@@ -1,4 +1,4 @@
-FROM debian:12-slim
+FROM debian:12.6-slim
 LABEL version="1.0"
 
 ARG DEVUSER="vscode"
@@ -12,7 +12,8 @@ RUN apt-get update && \
     gcc-12 g++-12 gdb gdbserver iwyu \
     clang-14 clang-tidy-14 clang-format-14 clangd-14 \
     cppcheck git tig catch2 \
-    python3 python3-pip
+    python3 python3-pip python3-venv \
+    iputils-ping
 
 # Install trompeloeil from source
 ARG BUILD_DIR="/tmp/deps"
@@ -24,6 +25,9 @@ RUN mkdir -p $BUILD_DIR && \
     cd build && \
     cmake .. && \
     cmake --build . --target install
+
+# cleanup
+RUN rm -rf $BUILD_DIR/*
 
 # add a user
 RUN useradd -ms /bin/bash $DEVUSER
@@ -47,6 +51,13 @@ USER $DEVUSER
 
 # Set the working directory
 WORKDIR /home/$DEVUSER
+
+# Install conan in virtual environment
+RUN python3 -m venv venv
+RUN . /home/$DEVUSER/venv/bin/activate && \
+    pip install --upgrade pip && pip install conan
+ENV PATH="/home/$DEVUSER/venv/bin:$PATH"
+RUN conan --version
 
 # Set the entry point to bash
 CMD ["/bin/bash"]
