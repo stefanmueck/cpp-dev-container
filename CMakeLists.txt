@@ -35,6 +35,11 @@ target_compile_features(project_options INTERFACE cxx_std_20)
 include(cmake/cache.cmake)
 
 ################################################################
+# sanitizer options if supported by compiler
+include(cmake/Sanitizers.cmake)
+enable_sanitizers(project_options)
+
+################################################################
 # disassembly
 option(GENERATE_DISSASSEMBLY "Generate Dissassembly" OFF)
 if(GENERATE_DISSASSEMBLY)
