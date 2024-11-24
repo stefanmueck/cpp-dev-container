@@ -7,9 +7,7 @@
 	// 	"dockerfile": "../Dockerfile"
 	// },
 	"image": "stefanmueck/cpp-dev-container:latest",
-	"runArgs": [
-		"--network=dev-network"
-	],
+	"runArgs": [],
 	"customizations": {
 		"vscode": {
 			"extensions": [
