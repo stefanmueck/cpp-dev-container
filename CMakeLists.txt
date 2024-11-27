@@ -36,7 +36,7 @@ include(cmake/cache.cmake)
 
 ################################################################
 # sanitizer options if supported by compiler
-include(cmake/Sanitizers.cmake)
+include(cmake/sanitizers.cmake)
 enable_sanitizers(project_options)
 
 ################################################################
