@@ -38,13 +38,6 @@ readability-*,
 WarningsAsErrors: ''
 FormatStyle: none
 
-# HeaderFilterRegex is parsed using llvm::Regex, which does not
-# support negative lookahead.
-#
-# This regex narrows down the parsed header files to the path
-# ".../NM/Backend/src/..."
-# while filtering out any paths using indirections like
-# ".../NM/Backend/src/../../Backend/src/Database/...".
 HeaderFilterRegex: '^.*\.(h|hpp)$'
 
 CheckOptions:
